@@ -48,7 +48,10 @@ int main() {
           
             
         }
-      
+        else {
+            std::cout << "До свидания!" << std::endl;
+            return 0;
+        }
         while (true)
         {
            
