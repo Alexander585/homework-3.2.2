@@ -6,7 +6,7 @@ private:
     double value;
 
 public:
-    // Конструктор с значением по умолчанию
+    
     Counter(double initialValue = 0) : value(initialValue) {}
 
     void set(double n) {
@@ -43,7 +43,7 @@ int main() {
     }
     else {
         std::cout << "Используется значение по умолчанию (0)" << std::endl;
-        // Конструктор по умолчанию уже установил значение 0
+        
     }
 
     std::string command;
