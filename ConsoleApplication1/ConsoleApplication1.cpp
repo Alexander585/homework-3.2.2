@@ -1,90 +1,74 @@
 ﻿#include <iostream>
-#include <string.h>
+#include <string>
+
 class Counter {
 private:
-    double num1;
-  
+    double value;
 
 public:
-    Counter() : num1(0)  {}
+    // Конструктор с значением по умолчанию
+    Counter(double initialValue = 0) : value(initialValue) {}
 
-    
-    void set(double n1 ) {
-       num1 = n1;
-        
-    }
-  
-    double add() {
-      return   num1++;
+    void set(double n) {
+        value = n;
     }
 
-
-
-    double subtract_1_2() {
-       return num1--;
+    void increment() {
+        value++;
     }
-    double ret_num()  {
-        return num1;
+
+    void decrement() {
+        value--;
     }
- 
+
+    double getValue() const {
+        return value;
+    }
 };
 
 int main() {
-    
-       
+    setlocale(LC_ALL, "RUS");
+    char choice;
 
-        setlocale(LC_ALL, "RUS");
-        double input1;
-        std::string input2;
-        char vopr;
+    std::cout << "Вы хотите указать начальное значение счётчика? Введите y: ";
+    std::cin >> choice;
 
-        Counter counter;
-        std::cout << "Вы хотите указать начальное значение счётчика? Введите y:";
-        std::cin >> vopr;
-        if (vopr == 'y') {
-            std::cout << "Введите начальное значение счётчика:";
-            std::cin >> input1;
-            counter.set(input1);
-          
-            
+    Counter counter;
+
+    if (choice == 'y' || choice == 'Y') {
+        double initialValue;
+        std::cout << "Введите начальное значение счётчика: ";
+        std::cin >> initialValue;
+        counter.set(initialValue);
+    }
+    else {
+        std::cout << "Используется значение по умолчанию (0)" << std::endl;
+        // Конструктор по умолчанию уже установил значение 0
+    }
+
+    std::string command;
+
+    while (true) {
+        std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
+        std::cin >> command;
+
+        if (command == "+") {
+            counter.increment();
+        }
+        else if (command == "-") {
+            counter.decrement();
+        }
+        else if (command == "=") {
+            std::cout << counter.getValue() << std::endl;
+        }
+        else if (command == "x") {
+            std::cout << "До свидания!" << std::endl;
+            break;
         }
         else {
-            std::cout << "До свидания!" << std::endl;
-            return 0;
+            std::cout << "Неизвестная команда!" << std::endl;
         }
-        while (true)
-        {
-           
-                
-            std::cout << "Введите команду ('+', '-', '=' или 'x'):";
-            std::cin >> input2;
-           
+    }
 
-
-            if (input2 == "+") {
-               
-                counter.add();
-            }
-            if (input2 == "-") {
-               
-                counter.subtract_1_2();
-            }
-            if (input2 == "=") {
-                std::cout << counter.ret_num() << std::endl;
-                
-
-            }
-            if (input2 == "x") {
-                
-                std::cout << "До свидания!" << std::endl;
-                return 0;
-
-            }
-
-
-
-
-        }
-    
+    return 0;
 }
-
