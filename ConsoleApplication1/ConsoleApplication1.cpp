@@ -3,15 +3,12 @@
 
 class Counter {
 private:
-    double value;
+    int value;
 
 public:
-    
-    Counter(double initialValue = 0) : value(initialValue) {}
+    Counter() : value(1) {}
 
-    void set(double n) {
-        value = n;
-    }
+    Counter(int initialValue) : value(initialValue) {}
 
     void increment() {
         value++;
@@ -21,29 +18,29 @@ public:
         value--;
     }
 
-    double getValue() const {
+    int getValue() const {
         return value;
     }
 };
 
 int main() {
     setlocale(LC_ALL, "RUS");
-    char choice;
+    std::string choice;
 
-    std::cout << "Вы хотите указать начальное значение счётчика? Введите y: ";
+    std::cout << "Вы хотите указать начальное значение счётчика? Введите yes или no: ";
     std::cin >> choice;
 
-    Counter counter;
+    int initialValue;
+    Counter* counter;
 
-    if (choice == 'y' || choice == 'Y') {
-        double initialValue;
+    if (choice == "yes") {
         std::cout << "Введите начальное значение счётчика: ";
         std::cin >> initialValue;
-        counter.set(initialValue);
+        counter = new Counter(initialValue);
     }
     else {
-        std::cout << "Используется значение по умолчанию (0)" << std::endl;
-        
+        counter = new Counter();
+        std::cout << "Используется значение по умолчанию: " << counter->getValue() << std::endl;
     }
 
     std::string command;
@@ -53,13 +50,13 @@ int main() {
         std::cin >> command;
 
         if (command == "+") {
-            counter.increment();
+            counter->increment();
         }
         else if (command == "-") {
-            counter.decrement();
+            counter->decrement();
         }
         else if (command == "=") {
-            std::cout << counter.getValue() << std::endl;
+            std::cout << counter->getValue() << std::endl;
         }
         else if (command == "x") {
             std::cout << "До свидания!" << std::endl;
@@ -70,5 +67,6 @@ int main() {
         }
     }
 
+    delete counter;
     return 0;
 }
